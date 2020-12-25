@@ -1,32 +1,42 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <q-layout view="hHh LpR lFr">
+
+        <q-header bordered class="bg-primary text-white">
+            <q-toolbar>
+                <q-toolbar-title>
+                    <q-avatar>
+                        <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+                    </q-avatar>
+                    Title
+                </q-toolbar-title>
+            </q-toolbar>
+        </q-header>
+
+        <q-page-container class="container">
+            <router-view/>
+        </q-page-container>
+
+    </q-layout>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-}
+<script>
+    export default {
+        name: 'LayoutDefault',
+        data() {
+            return {
+                leftDrawerOpen: false
+            }
+        }
+    }
+</script>
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style lang="scss">
+    body {
+        background-color: #f5f5f5;
+    }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    .container {
+        min-height: 100vh;
+    }
 </style>
