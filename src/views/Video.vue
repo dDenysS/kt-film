@@ -6,7 +6,7 @@
         <div class="col">
             <scenes/>
         </div>
-        <div class="col-3"></div>
+        <div class="col-shrink"></div>
     </div>
 </template>
 

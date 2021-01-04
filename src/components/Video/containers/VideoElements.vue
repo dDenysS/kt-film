@@ -28,7 +28,7 @@
                 <q-tab-panel name="templates">
                     <div class="q-mb-md row no-wrap justify-between items-center">
                         <h4 class="text-h4 q-ma-none">Templates</h4>
-                        <q-btn round color="primary" icon="close"/>
+                        <q-btn @click="tab = ''" round color="primary" icon="close"/>
                     </div>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio
                         iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa
@@ -37,38 +37,47 @@
 
                 <q-tab-panel name="text">
                     <div class="q-mb-md row no-wrap justify-between items-center">
-                        <h4 class="text-h4 q-ma-none">Text</h4>
-                        <q-btn round color="primary" icon="close"/>
+                        <h4 class="text-h4 q-ma-none">Animation</h4>
+                        <q-btn @click="tab = ''" round color="primary" icon="close"/>
                     </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio
-                        iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa
-                        fuga nulla ullam. In, libero.</p>
+                    <p>   <q-btn @click="handleAnimation" round color="primary">Animation</q-btn></p>
+                    <p>   <q-btn @click="handleGenerateVideo" round color="primary">Generate video</q-btn></p>
                 </q-tab-panel>
 
                 <q-tab-panel name="photos">
                     <div class="q-mb-md row no-wrap justify-between items-center">
                         <h4 class="text-h4 q-ma-none">Photos</h4>
-                        <q-btn round color="primary" icon="close"/>
+                        <q-btn @click="tab = ''" round color="primary" icon="close"/>
                     </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio
-                        iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa
-                        fuga nulla ullam. In, libero.</p>
+                    <photos/>
                 </q-tab-panel>
 
                 <q-tab-panel name="icons">
                     <div class="q-mb-md row no-wrap justify-between items-center">
                         <h4 class="text-h4 q-ma-none">Icons</h4>
-                        <q-btn round color="primary" icon="close"/>
+                        <q-btn @click="tab = ''" round color="primary" icon="close"/>
                     </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio
-                        iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa
-                        fuga nulla ullam. In, libero.</p>
+                    <div>
+                        <q-form сlass="q-mb-md" action="https://some-url.com" method="post">
+                            <q-input  сlass="q-mb-md" name="firstname" style="margin-bottom:10px;" placeholder="Input you svg" />
+                            <q-btn label="Submit" type="submit" color="primary"/>
+                                <!-- ... -->
+                        </q-form>
+                        <q-file class="q-mb-md" color="grey-3" outlined label-color="orange" label="Load own svg">
+                            <template v-slot:append>
+                                <q-icon name="attachment" color="orange" />
+                            </template>
+                        </q-file>
+                    </div>
+                    <icons/>
                 </q-tab-panel>
                 <q-tab-panel name="scenes">
                     <div class="q-mb-md row no-wrap justify-between items-center">
                         <h4 class="text-h4 q-ma-none">Scenes</h4>
-                        <q-btn round color="primary" icon="close"/>
+                        <q-btn @click="tab = ''" round color="primary" icon="close"/>
                     </div>
+                    <q-btn @click="addNewScene" align="between" class="btn-fixed-width" color="accent"
+                           label="Add new scene" icon="add"/>
                     <scenes-nav/>
                 </q-tab-panel>
             </q-tab-panels>
@@ -77,17 +86,32 @@
 </template>
 
 <script>
-    import ScenesNav from './ScenesNav'
+import ScenesNav from './ScenesNav'
+import Photos from './Photos'
+import Icons from './Icons'
 
-    export default {
-        name: 'VideoElements',
-        components: {
-            ScenesNav
+export default {
+    name: 'VideoElements',
+    components: {
+        ScenesNav,
+        Photos,
+        Icons
+    },
+    data: () => ({
+        tab: ''
+    }),
+    methods: {
+        addNewScene() {
+            this.$vCanvasController.addScene()
         },
-        data: () => ({
-            tab: ''
-        })
+        handleAnimation() {
+            this.$vCanvasController.addAnimation()
+        },
+        handleGenerateVideo() {
+            this.$vCanvasController.generateVideo()
+        }
     }
+}
 </script>
 
 <style scoped>
@@ -95,6 +119,13 @@
         height: calc(100vh - 51px);
         background-color: #fff;
     }
+
+    .root >>> .q-panel > div {
+        height: calc(100vh - 51px);
+        display: flex;
+        flex-direction: column;
+    }
+
 
     .root >>> .q-splitter__after {
         z-index: 2;

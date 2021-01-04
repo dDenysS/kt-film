@@ -31,11 +31,22 @@
     }
 </script>
 
-<style lang="scss">
+<style>
     body {
         background-color: #f5f5f5;
     }
 
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+</style>
+
+<style scoped lang="scss">
     .container {
         min-height: 100vh;
     }
